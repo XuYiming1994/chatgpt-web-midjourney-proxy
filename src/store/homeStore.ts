@@ -6,7 +6,7 @@ export const homeStore = reactive({
     myData:{
         act:'',//动作
         act2:'',//动作
-        actData:{} //动作类别 
+        actData:{} //动作类别
         ,local:'' //当前所处的版本
         ,session:{} as any
         ,isLoader:false
@@ -16,25 +16,25 @@ export const homeStore = reactive({
         ,ms:{} as any
         ,is_luma_pro:false
         ,is_viggle_pro:false
-       
+
     }
-    
+
     ,setMyData( v:object){
-        this.myData={...this.myData,...v}; 
-        if( Object.keys(v).indexOf('act')>-1){ 
+        this.myData={...this.myData,...v};
+        if( Object.keys(v).indexOf('act')>-1){
             setTimeout(()=> {
                 this.myData.act=''
                 this.myData.actData=''
             }, 2000 );
         }
-        if( Object.keys(v).indexOf('act2')>-1){ 
+        if( Object.keys(v).indexOf('act2')>-1){
             setTimeout(()=> {
                 this.myData.act2=''
                 this.myData.actData=''
             }, 500 );
         }
     }
- 
+
 })
 
 export interface gptConfigType{
@@ -81,7 +81,7 @@ export const gptConfigStore= reactive({
     myData:getGptInt(),
     setMyData(v: Partial<gptConfigType>){
 
-         this.myData={...this.myData,...v}; 
+         this.myData={...this.myData,...v};
          //mlog('gptConfigStore', v )
          if(v.model && !v.gpts) this.myData.gpts=undefined;
 
@@ -121,20 +121,20 @@ const  getServerDefault=()=>{
 let v:gptServerType={
         OPENAI_API_KEY:'',
         OPENAI_API_BASE_URL:'',
-        MJ_SERVER:'',
+        MJ_SERVER:'http://3.68.6.69:8080',
         UPLOADER_URL:'',
         MJ_API_SECRET:'',
         SUNO_KEY:'',
         SUNO_SERVER:'',
-        MJ_CDN_WSRV:false
-        ,IS_SET_SYNC:true,
+        MJ_CDN_WSRV:false,
+        IS_SET_SYNC:true,
         LUMA_SERVER:'',
         LUMA_KEY:'',
         VIGGLE_SERVER:'',
         VIGGLE_KEY:'',
         TAB_VIDEO:'luma',
         RUNWAY_SERVER:'',
-        RUNWAY_KEY:''
+        RUNWAY_KEY:'',
     }
     return v ;
 }
@@ -151,7 +151,7 @@ const getServerInit= ():gptServerType =>{
 export const gptServerStore= reactive({
     myData:getServerInit(),
     setMyData(v: Partial<gptServerType>){
-         this.myData={...this.myData,...v}; 
+         this.myData={...this.myData,...v};
          localStorage.setItem('gptServerStore', JSON.stringify( this.myData));
     }
     ,setInit(){
@@ -163,7 +163,7 @@ export const gptServerStore= reactive({
 const gptsUlistInit= ():gptsType[]=>{
     const lk= ss.get('gpts-use-list');
     if( !lk) return [];
-    return lk as gptsType[]; 
+    return lk as gptsType[];
 }
 
 //使用gtps列表
